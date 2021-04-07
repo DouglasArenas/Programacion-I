@@ -1,7 +1,12 @@
-from flask_restful import recursos
+from flask_restful import Resource
 from flask import request
 
-class Compras(recursos):
+COMPRAS = {
+    1: {'Primer compra': 'Papas y camotes'},
+    2: {'Segunda compra': 'Zapallos y zanahorias'}
+}
+
+class Compras(Resource):
 
     def get(self, id):
 
@@ -10,7 +15,7 @@ class Compras(recursos):
             return Compras[int(id)]
 
         return '', 404
-class Compra(recursos):
+class Compra(Resource):
 
     def get(self, id):
 

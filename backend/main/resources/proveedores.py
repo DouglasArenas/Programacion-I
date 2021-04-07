@@ -1,21 +1,39 @@
-from flask_restful import recursos
+from flask_restful import Resource
 from flask import request
 
-class Proveedores(recursos):
+PROVEEDORES = {
+    1: {'firstname': 'cuyito', 'lastname': 'srl'},
+    2: {'firstname': 'mendoagro', 'lastname': 'sa'},
+}
 
+
+class Proveedores(Resource):
+    def get(self):
+        return PROVEEDORES
+
+    def post(self):
+        proveedor = request.get_json()
+        id = int(max(PROVEEDORES.keys())) + 1
+        PROVEEDORES[id] = proveedor
+        return PROVEEDORES[id], 201
+
+
+class Proveedor(Resource):
     def get(self, id):
+        if int(id) in PROVEEDORES:
+            return PROVEEDORES[int(id)]
+        return "", 404
 
-        if int(id) in Proveedores:
-
-            return Proveedores[int(id)]
-
+    def delete(self, id):
+        if int(id) in PROVEEDORES:
+            del PROVEEDORES[id]
+            return '', 204
         return '', 404
-class Proveedor(recursos):
 
-    def get(self, id):
-
-        if int(id) in Proveedor:
-
-            return Proveedor[int(id)]
-
+    def put(self, id):
+        if int(id) in PROVEEDORES:
+            proveedor = PROVEEDORES[int(id)]
+            date = request.get_json()
+            proveedor.update(date)
+            return proveedor, 201
         return '', 404

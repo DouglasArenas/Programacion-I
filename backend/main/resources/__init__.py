@@ -1,9 +1,15 @@
-from .Bolsones import recursos as BolsonesRecurso
-from .Bolson import recursos as BolsonRecurso
-from .Bolsones Venta import recursos as BolsonesVentaRecurso
-from .Bolson Venta import recursos as BolsonVentaRecurso
-from .Bolsones Pendientes import recursos as BolsonesPendiestesRecurso
-from .Bolson Pendiente import recursos as BolsonPendienteRecurso
-from .Bolsones Previos import recursos as BolsonesPreviosRecurso
-from .Productos import recursos as ProductosRecurso
-from .Producto import recursos as ProductoRecurso
+from .bolsones import Bolsones as BolsonesResource
+from .bolsones import Bolson as BolsonResource
+from .bolsonesventa import BolsonesVenta as BolsonesVentaResource
+from .bolsonesventa import BolsonVenta as BolsonVentaResource
+from .bolsonespendientes import BolsonesPendientes as BolsonesPendientesResource
+from .bolsonespendientes import BolsonPendiente as BolsonPendienteResource
+from .bolsonesprevios import BolsonesPrevios as BolsonesPreviosResource
+from .productos import Productos as ProductosResource
+from .productos import Producto as ProductoResource
+from .compras import Compras as ComprasResource
+from .compras import Compra as CompraResource
+from .clientes import Clientes as ClientesResource
+from .clientes import Cliente as ClienteResource
+from .proveedores import Proveedores as ProveedoresResource
+from .proveedores import Proveedor as ProveedorResource

@@ -1,21 +1,39 @@
-from flask_restful import recursos
+from flask_restful import Resource
 from flask import request
 
-class Clientes(recursos):
+CLIENTES = {
+    1: {'firstname': 'Franco', 'lastname': 'Rosas'},
+    2: {'firstname': 'Yamila', 'lastname': 'Ramos'},
+}
 
+
+class Clientes(Resource):
+    def get(self):
+        return CLIENTES
+
+    def post(self):
+        cliente = request.get_json()
+        id = int(max(CLIENTES.keys())) + 1
+        CLIENTES[id] = cliente
+        return CLIENTES[id], 201
+
+
+class Cliente(Resource):
     def get(self, id):
+        if int(id) in CLIENTES:
+            return CLIENTES[int(id)]
+        return "", 404
 
-        if int(id) in Clientes:
-
-            return Clientes[int(id)]
-
+    def delete(self, id):
+        if int(id) in CLIENTES:
+            del CLIENTES[id]
+            return '', 204
         return '', 404
-class Cliente(recursos):
 
-    def get(self, id):
-
-        if int(id) in Cliente:
-
-            return Cliente[int(id)]
-
+    def put(self, id):
+        if int(id) in CLIENTES:
+            cliente = CLIENTES[int(id)]
+            date = request.get_json()
+            cliente.update(date)
+            return cliente, 201
         return '', 404

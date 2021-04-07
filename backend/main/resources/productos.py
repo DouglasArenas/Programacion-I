@@ -1,21 +1,19 @@
-from flask_restful import recursos
+from flask_restful import Resource
 from flask import request
 
-class Productos(recursos):
+PRODUCTOS = {
+    1: {'primer producto': '1er producto'},
+    2: {'segundo producto': '2do producto'}
+}
 
+
+class Productos(Resource):
+    def get(self):
+        return PRODUCTOS
+
+
+class Producto(Resource):
     def get(self, id):
-
-        if int(id) in Productos:
-
-            return Productos[int(id)]
-
-        return '', 404
-class Producto(recursos):
-
-    def get(self, id):
-
-        if int(id) in Producto:
-
-            return Producto[int(id)]
-
-        return '', 404
+        if int(id) in PRODUCTOS:
+            return PRODUCTOS[int(id)]
+        return "", 404

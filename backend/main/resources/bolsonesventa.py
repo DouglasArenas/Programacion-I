@@ -1,21 +1,20 @@
-from flask_restful import recursos
+from flask_restful import Resource
 from flask import request
 
-class BolsonesVenta(recursos):
+BOLSONESVENTA = {
+    1: {'primer bolson venta': 'Bolson1'},
+    2: {'segundo bolson venta': 'Bolson2'},
+    3: {'tercer bolson venta': 'Bolson3'},
+}
 
+
+class BolsonesVenta(Resource):
+    def get(self):
+        return BOLSONESVENTA
+
+
+class BolsonVenta(Resource):
     def get(self, id):
-
-        if int(id) in BolsonesVenta:
-
-            return BolsonesVenta[int(id)]
-
-        return '', 404
-class BolsonVenta(recursos):
-
-    def get(self, id):
-
-        if int(id) in BolsonVenta:
-
-            return BolsonVenta[int(id)]
-
-        return '', 404
+        if int(id) in BOLSONESVENTA:
+            return BOLSONESVENTA[int(id)]
+        return "", 404
