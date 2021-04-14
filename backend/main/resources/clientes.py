@@ -26,14 +26,14 @@ class Cliente(Resource):
 
     def delete(self, id):
         if int(id) in CLIENTES:
-            del CLIENTES[id]
+            del CLIENTES[int(id)]
             return '', 204
         return '', 404
 
     def put(self, id):
         if int(id) in CLIENTES:
             cliente = CLIENTES[int(id)]
-            date = request.get_json()
-            cliente.update(date)
+            data = request.get_json()
+            cliente.update(data)
             return cliente, 201
         return '', 404

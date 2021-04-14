@@ -18,3 +18,4 @@ class BolsonPrevio(Resource):
         if int(id) in BOLSONESPREVIOS:
             return BOLSONESPREVIOS[int(id)]
         return "", 404
+        

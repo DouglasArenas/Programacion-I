@@ -2,25 +2,38 @@ from flask_restful import Resource
 from flask import request
 
 COMPRAS = {
-    1: {'Primer compra': 'Papas y camotes'},
-    2: {'Segunda compra': 'Zapallos y zanahorias'}
+    1: {'primer compra': 'Primer compra'},
+    2: {'segunda compra': 'Segunda compra'}
 }
 
+
 class Compras(Resource):
+    def get(self):
+        return COMPRAS
 
-    def get(self, id):
+    def post(self):
+        compra = request.get_json()
+        id = int(max(COMPRAS.keys())) + 1
+        COMPRAS[id] = compra
+        return COMPRAS[id], 201
 
-        if int(id) in Compras:
 
-            return Compras[int(id)]
-
-        return '', 404
 class Compra(Resource):
-
     def get(self, id):
+        if int(id) in COMPRAS:
+            return COMPRAS[int(id)]
+        return "", 404
 
-        if int(id) in Compra:
+    def delete(self, id):
+        if int(id) in COMPRAS:
+            del COMPRAS[int(id)]
+            return '', 204
+        return '', 404
 
-            return Compra[int(id)]
-
+    def put(self, id):
+        if int(id) in COMPRAS:
+            compra = COMPRAS[int(id)]
+            date = request.get_json()
+            compra.update(date)
+            return compra, 201
         return '', 404
