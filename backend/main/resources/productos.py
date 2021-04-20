@@ -29,3 +29,11 @@ class Producto(Resource):
             del PRODUCTOS[int(id)]
             return '', 204
         return '', 404
+
+    def put(self, id):
+        if int(id) in PRODUCTOS:
+            producto = PRODUCTOS[int(id)]
+            data = request.get_json()
+            producto.update(data)
+            return producto, 201
+        return '', 404
