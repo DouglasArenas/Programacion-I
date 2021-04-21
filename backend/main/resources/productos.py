@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+# from main.models import ProductoModel
 
 PRODUCTOS = {
     1: {'primer producto': '1er producto'},

@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+"from main.models import BolsonModel
 
 BOLSONESPENDIENTES = {
     1: {'primer bolson pendiente': 'Bolson1'},

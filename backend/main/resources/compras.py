@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+# from main.models import CompraModel
 
 COMPRAS = {
     1: {'primer compra': 'Primer compra'},

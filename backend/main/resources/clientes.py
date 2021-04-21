@@ -1,5 +1,6 @@
 from flask_restful import Resource
 from flask import request
+# from main.modeleteetes import ClienteModel
 
 CLIENTES = {
     1: {'firstname': 'Franco', 'lastname': 'Rosas'},
@@ -26,7 +27,7 @@ class Cliente(Resource):
 
     def delete(self, id):
         if int(id) in CLIENTES:
-            del CLIENTES[int(id)]
+            delete CLIENTES[int(id)]
             return '', 204
         return '', 404
 
