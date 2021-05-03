@@ -1,41 +1,37 @@
 from flask_restful import Resource
-from flask import request
-"from main.models import BolsonModel
-
-BOLSONESPENDIENTES = {
-    1: {'primer bolson pendiente': 'Bolson1'},
-    2: {'segundo bolson pendiente': 'Bolson2'},
-    3: {'tercer bolson pendiente': 'Bolson3'},
-}
-
+from flask import request, jsonify
+from .. import db
+from main.models import BolsonModel
 
 class BolsonesPendientes(Resource):
     def get(self):
-        return BOLSONESPENDIENTES
+        bolsonespendientes = db.session.query(BolsonModel).filter(BolsonModel. approved == 0).all()
+        return jsonify([bolsonpendiente.to_json() for bolsonpendiente in bolsonespendientes])
+
 
     def post(self):
-        bolsonpendiente = request.get_json()
-        id = int(max(BOLSONESPENDIENTES.keys())) + 1
-        BOLSONESPENDIENTES[id] = bolsonpendiente
-        return BOLSONESPENDIENTES[id], 201
+        bolsonpendiente = BolsonModel.from_json(request.get_json())
+        db.session.add(bolsonpendiente)
+        db.session.commit()
+        return bolsonpendiente.to_json(), 201
 
 
 class BolsonPendiente(Resource):
     def get(self, id):
-        if int(id) in BOLSONESPENDIENTES:
-            return BOLSONESPENDIENTES[int(id)]
-        return "", 404
+        bolsonpendiente = db.session.query(BolsonModel).get_or_404(id)
+        return bolsonpendiente.to_json()
 
     def delete(self, id):
-        if int(id) in BOLSONESPENDIENTES:
-            del BOLSONESPENDIENTES[int(id)]
-            return '', 204
-        return '', 404
+        bolsonpendiente = db.session.query(BolsonModel).get_or_404(id)
+        db.session.delete(cliente)
+        db.session.commit()
+        return '', 204
 
     def put(self, id):
-        if int(id) in BOLSONESPENDIENTES:
-            bolsonprevio = BOLSONESPENDIENTES[int(id)]
-            date = request.get_json()
-            bolsonprevio.update(date)
-            return bolsonprevio, 201
-        return '', 404
+        bolsonpendiente = db.session.query(BolsonModel).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(bolsonpendiente, key, value)
+        db.session.add(bolsonpendiente)
+        db.session.commit()
+        return bolsonpendiente.to_json(), 201
