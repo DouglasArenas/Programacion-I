@@ -1,40 +1,70 @@
 from flask_restful import Resource
-from flask import request
-# from main.models import ProductoModel
-
-PRODUCTOS = {
-    1: {'primer producto': '1er producto'},
-    2: {'segundo producto': '2do producto'}
-}
-
-
-class Productos(Resource):
-    def get(self):
-        return PRODUCTOS
-
-    def post(self):
-        producto = request.get_json()
-        id = int(max(PRODUCTOS.keys())) + 1
-        PRODUCTOS[id] = producto
-        return PRODUCTOS[id], 201
-
+from flask import request, jsonify
+from .. import db
+from main.models import ProductoModel
 
 class Producto(Resource):
     def get(self, id):
-        if int(id) in PRODUCTOS:
-            return PRODUCTOS[int(id)]
-        return "", 404
+        producto = db.session.query(ProductoModel).get_or_404(id)
+        try:
+            return producto.to_json()
+        except:
+            return '', 404
 
     def delete(self, id):
-        if int(id) in PRODUCTOS:
-            del PRODUCTOS[int(id)]
+        producto = db.session.query(ProductoModel).get_or_404(id)
+        try:
+            db.session.delete(producto)
+            db.session.commit()
             return '', 204
-        return '', 404
+        except:
+            return '', 404
 
     def put(self, id):
-        if int(id) in PRODUCTOS:
-            producto = PRODUCTOS[int(id)]
-            data = request.get_json()
-            producto.update(data)
-            return producto, 201
-        return '', 404
+        producto = db.session.query(ProductoModel).get_or_404(id)
+        data = request.get_json().items()
+        for key, value in data:
+            setattr(producto, key, value)
+        try:
+            db.session.add(producto)
+            db.session.commit()
+            return producto.to_json(), 201
+        except:
+            return '', 404
+
+class Productos(Resource):
+    def get(self):
+
+        page = 1
+        per_page = 10
+        productos = db.session.query(ProductoModel)
+        if request.get_json():  
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "proveedorId":
+                    productos = productos.filter(ProductoModel.proveedorId == value)
+                elif key == 'page':
+                    page = int(value)
+                elif key == 'per_page':
+                    per_page = int(value)
+
+        productos = productos.paginate(page, per_page, True, 30)
+
+        return jsonify({
+            'productos': [producto.to_json() for producto in productos.items],
+            'total': productos.total,
+            'pages': productos.pages,
+            'page': page
+        })
+
+
+    
+    def post(self):
+        producto = ProductoModel.from_json(request.get_json())
+        try:
+            db.session.add(producto)
+            db.session.commit()
+        except:
+            return '', 404
+        return producto.to_json()
+            

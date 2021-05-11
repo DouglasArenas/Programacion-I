@@ -3,13 +3,13 @@ from . import ProductoModel, BolsonModel
 
 class ProductoBolson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    productoid = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
+    productoId = db.Column(db.Integer, db.ForeignKey('producto.id'), nullable=False)
     producto = db.relationship('Producto', back_populates="productosbolsones", uselist=False, single_parent=True)
-    bolsonid = db.Column(db.Integer, db.ForeignKey('bolson.id'), nullable=False)
+    bolsonId = db.Column(db.Integer, db.ForeignKey('bolson.id'), nullable=False)
     bolson = db.relationship('Bolson', back_populates="productosbolsones", uselist=False, single_parent=True)
 
     def __repr__(self):
-        return f'Productos-Bolsones: {self.id}, {self.producto.to_json()}, {self.bolson.to_json()}'
+        return f'Producto-Bolsones: {self.id}, {self.producto.to_json()}, {self.bolson.to_json()}'
 
     def to_json(self):
         productobolson_json = {
@@ -20,12 +20,13 @@ class ProductoBolson(db.Model):
         return productobolson_json
 
     @staticmethod
+    
     def from_json(producto_json):
         id = producto_json.get('id')
-        productoid = producto_json.get('productoid')
-        bolsonid = producto_json.get('bolsonid')
+        productoId = producto_json.get('productoId')
+        bolsonId = producto_json.get('bolsonId')
         return ProductoBolson(
             id = id,
-            productoid = productoid,
-            bolsonid = bolsonid
+            productoId = productoId,
+            bolsonId = bolsonId
         )
