@@ -1,5 +1,4 @@
-
-"""from .. import db
+from .. import db
 from werkzeug.security import  generate_password_hash, check_password_hash
 
 class Usuario(db.Model):
@@ -53,4 +52,5 @@ class Usuario(db.Model):
                     mail=mail,
                     plain_password=password,
                     rol=rol
-                    )"""
+                    )
+                    
