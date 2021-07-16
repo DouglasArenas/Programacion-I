@@ -1,5 +1,5 @@
 from .. import db
-from . import ProductoModel, BolsonModel
+#from . import ProductoModel, BolsonModel
 
 class ProductoBolson(db.Model):
     id = db.Column(db.Integer, primary_key=True)

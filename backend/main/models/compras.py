@@ -1,6 +1,6 @@
 from .. import db
 import datetime as dt
-from . import ClienteModel, BolsonModel
+from . import UsuarioModel
 
 class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,7 +12,7 @@ class Compra(db.Model):
     bolson = db.relationship('Bolson', back_populates="compras", uselist=False, single_parent=True)
 
     def __repr__(self):
-        return f'Compra: {self.id}, {self.fecha_hora_compra}, {self.retirado}, {self.cliente.to_json()}, {self.bolson.to_json()}'
+        return f'<Compra: %r %r %r %r >' % (self.clienteId, self.bolsonId, self.fecha_hora_compra, self.retirado)
 
     def to_json(self):
         compra_json = {

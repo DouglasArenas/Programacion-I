@@ -9,7 +9,7 @@ class Producto(db.Model):
     productosbolsones = db.relationship("ProductoBolson", back_populates="producto", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f'Producto: {self.nombre}'
+        return f'Producto: {self.nombre}, {self.proveedorId}'
         
     def to_json(self):
         producto_json = {

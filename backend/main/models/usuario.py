@@ -6,7 +6,7 @@ class Usuario(db.Model):
     nombre = db.Column(db.String(100), nullable = False)
     apellido = db.Column(db.String(100), nullable = False)
     telefono = db.Column(db.String(100), nullable = False)
-    mail = db.Column(db.String(100), nullable = False)
+    mail = db.Column(db.String(100), unique = True, nullable = False)
     password = db.Column(db.String(128), nullable=False)
     rol = db.Column(db.String(10), nullable=False, default="cliente")
     compras = db.relationship('Compra', back_populates='usuarios', cascade='all, delete-orphan')
@@ -23,8 +23,9 @@ class Usuario(db.Model):
     def validate_pass(self,password):
         return check_password_hash(self.password, password)
 
-    def _repr_(self):
+    def __repr__(self):
         return '<Usuario: %r %r %r %r >' % (self.nombre, self.apellido, self.telefono, self.mail)
+    
     def to_json(self):
         usuario_json = {
             'id': self.id,
@@ -44,8 +45,8 @@ class Usuario(db.Model):
         mail = usuario_json.get('mail')
         password = usuario_json.get('password')
         rol = usuario_json.get('rol')
-
-        return Usuario(id=id,
+        try:
+            return Usuario(id=id,
                     nombre=nombre,
                     apellido=apellido,
                     telefono=telefono,
@@ -53,4 +54,5 @@ class Usuario(db.Model):
                     plain_password=password,
                     rol=rol
                     )
-                    
+        except Exception:
+            return '', 400
