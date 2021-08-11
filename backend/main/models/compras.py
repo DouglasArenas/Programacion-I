@@ -1,6 +1,5 @@
 from .. import db
 import datetime as dt
-from . import UsuarioModel
 
 class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
