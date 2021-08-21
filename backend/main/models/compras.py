@@ -5,8 +5,8 @@ class Compra(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fecha_hora_compra = db.Column(db.DateTime, default=dt.datetime.now(), nullable=False)
     retirado = db.Column(db.Boolean, default=False, nullable=False)
-    clienteId = db.Column(db.Integer, db.ForeignKey('cliente.id'), nullable=False)
-    cliente = db.relationship('Cliente', back_populates="compras", uselist=False, single_parent=True)
+    clienteId = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
+    cliente = db.relationship('Usuario', back_populates="compras", uselist=False, single_parent=True)
     bolsonId = db.Column(db.Integer, db.ForeignKey('bolson.id'), nullable=False)
     bolson = db.relationship('Bolson', back_populates="compras", uselist=False, single_parent=True)
 

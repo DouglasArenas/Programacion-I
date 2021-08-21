@@ -7,6 +7,8 @@ class Producto(db.Model):
     proveedorId = db.Column(db.Integer, db.ForeignKey('proveedor.id'), nullable=False)
     proveedor = db.relationship('Proveedor', back_populates="productos", uselist=False, single_parent=True)
     productosbolsones = db.relationship("ProductoBolson", back_populates="producto", cascade="all, delete-orphan")
+    clienteId = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
+    cliente = db.relationship('Usuario', back_populates="productos", uselist=False, single_parent=True)
 
     def __repr__(self):
         return f'Producto: {self.nombre}, {self.proveedorId}'
