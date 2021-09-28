@@ -1,68 +1,14 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends 'main.html' %}
+{% from 'macros/form_macros.html' import show_field, show_submit %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles.css">
+{% block head %}
+    {{ super() }}
 
-    <title>Registrarse</title>
-  </head>
-  <body class="">
-    <nav class="navbar navbar-expand-lg navbar-dark color">
-      <div class="container">
-        <a class="navbar-brand" href="#">Bolsones</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mb-2 mb-lg-0 ms-auto">
-            
-            
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Productos
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Frutas</a></li>
-                <li><a class="dropdown-item" href="#">Verduras</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Ver todos</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Bolsones
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Todos</a></li>
-                <li><a class="dropdown-item" href="#">En ofertas</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Armá tu bolson</a></li>
-              </ul>
-            </li>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Buscar bolsones" aria-label="search">
-              <button class=" me-3 btn btn-outline-dark" type="submit">Buscar</button>
-            </form>
-            <li class="nav-item me-3">
-              <a class="nav-link active" aria-current="page" href="#">Iniciar sesion</a>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-warning" href="#" tabindex="-1" aria-disabled="true">Registrarse</button>
-            </li>
-            <li class="nav-item ms-3">
-              <a class="nav-link active" aria-current="page" href="#">Mis compras</a>
-            </li>
-          </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-    
+{% endblock %}
+
+{% block content %}
+
+
     <div class="container">
 
         <div class="row d-flex justify-content-center">
@@ -110,6 +56,5 @@
     -->
   </body>
 </html>
-
 
 
