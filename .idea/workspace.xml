@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a8c82d4c-5f23-4e25-9097-0e7fa61e75fe" name="Default Changelist" comment="" />
+    <list default="true" id="a8c82d4c-5f23-4e25-9097-0e7fa61e75fe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Programacion-I.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/.env-example" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/.env-example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main/routes/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/main/routes/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/main/static/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main/templates/inicio_sesion.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/main/templates/inicio_sesion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/main/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/main/templates/main.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,13 +34,27 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/main/static" />
       <recent name="$PROJECT_DIR$/frontend/main/satatic/css" />
     </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -44,17 +70,23 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="202" y="33" key="SettingsEditor" timestamp="1632863164470">
-      <screen x="67" y="27" width="1293" height="741" />
+    <state x="499" y="103" width="424" height="484" key="FileChooserDialogImpl" timestamp="1633474265673">
+      <screen x="67" y="27" width="1299" height="636" />
+    </state>
+    <state x="499" y="103" width="424" height="484" key="FileChooserDialogImpl/67.27.1299.636@67.27.1299.636" timestamp="1633474265673" />
+    <state x="203" y="33" key="SettingsEditor" timestamp="1633476445171">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="202" y="33" key="SettingsEditor/67.27.1293.741@67.27.1293.741" timestamp="1632863164470" />
+    <state x="203" y="33" key="SettingsEditor/67.27.1299.741@67.27.1299.741" timestamp="1633476445171" />
     <state x="369" y="225" key="com.intellij.ide.util.TipDialog" timestamp="1632861309491">
       <screen x="67" y="27" width="1293" height="741" />
     </state>
     <state x="369" y="225" key="com.intellij.ide.util.TipDialog/67.27.1293.741@67.27.1293.741" timestamp="1632861309491" />
-    <state x="376" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1632865574575">
-      <screen x="67" y="27" width="1293" height="741" />
+    <state x="377" y="89" width="676" height="678" key="search.everywhere.popup" timestamp="1633476413474">
+      <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="376" y="89" width="672" height="678" key="search.everywhere.popup/67.27.1293.741@67.27.1293.741" timestamp="1632865574575" />
+    <state x="377" y="89" width="676" height="678" key="search.everywhere.popup/67.27.1299.741@67.27.1299.741" timestamp="1633476413474" />
   </component>
 </project>
