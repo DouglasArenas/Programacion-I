@@ -6,7 +6,7 @@ main = Blueprint('main', __name__, url_prefix='/')
 
 @main.route('/')
 def index():
-    return render_template('principal.html', title='Venta de bolsones')
+    return render_template('bolsones.html', title='Venta de bolsones')
 
 @main.route('/register', methods=['POST', 'GET'])
 def register():

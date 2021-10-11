@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div class="row mt-5 ms-5 row-cols-2 row-cols-lg-4 g-2 g-lg-3 me-5 mb-5">
+
+
+      {% for bolsones in bolsones %}
+
+      {% endfor %}
+
+
+      <div class="col col-md-2 col-sm-6">
+        <div class="card p-3 border-dark">
+          <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Bolson</h5>
+            <p class="card-text">$123</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+          </div>
+        </div>
+      </div><div class="col col-md-2 col-sm-6">
+        <div class="card p-3 border-dark">
+          <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Bolson</h5>
+            <p class="card-text">$123</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+          </div>
+        </div>
+      </div><div class="col col-md-2">
+        <div class="card p-3 border-dark">
+          <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Bolson</h5>
+            <p class="card-text">$123</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+          </div>
+        </div>
+      </div><div class="col col-md-2">
+        <div class="card p-3 border-dark">
+          <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Bolson</h5>
+            <p class="card-text">$123</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+          </div>
+        </div>
+
+        <!-- {% for bolsones in bolsones %}
+        
+
+        <div class="bg-forms p-4 rounded mt-3 row">
+
+          <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-3 p-0">
+            <img src="https://via.placeholder.com/100x100" alt="" class="img-bolson">
+          </div>
+  
+          <div class="col-md-12 col-lg-12 col-xl-12 col-xxl-9 p-0">
+            <h2>{{ bolson['nombre'] }}</h2>
+  
+            <div class="mt-4">
+                <p>{{ bolson['descripcion'] }}</p>
+                <p>Fecha: {{ bolson['fecha'] }}</p>
+  
+                <div class="d-flex mt-4">
+                  <a href="{{url_for('bolsones.ver', id = bolson['id'] )}}">
+                      <div class="btn-own bg-danger me-2">Ver mas</div>
+                  </a>
+  
+                  <a href="#">
+                      <div class="btn-own bg-success">Reservar</div>
+                  </a>
+                </div>
+            
+            </div>
+  
+          </div>
+    </div>
+
+
+        {% endfor %} -->
+
+    {% endblock %}
+
