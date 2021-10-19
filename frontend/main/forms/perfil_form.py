@@ -4,7 +4,7 @@ from wtforms import PasswordField, SubmitField, StringField, IntegerField
 from wtforms.fields.html5 import EmailField
 from wtforms import validators
 
-class RegisterForm(FlaskForm):
+class PerfilForm(FlaskForm):
 
     nombre = StringField(
         'Nombre',
@@ -31,20 +31,27 @@ class RegisterForm(FlaskForm):
         ]
     )
 
-    password = PasswordField(
-        'Password',
+    new_password = PasswordField(
+        'Contraseña nueva',
         [
             validators.Required(message = 'La contraseña es requrida'),
-            validators.EqualTo('confirmar', message = 'Las contraseñas no coinciden')
+            validators.EqualTo('confirm', message = 'Las contraseñas no coinciden')
         ]
     )
 
-    confirm = PasswordField(
-        'Confirmar contraseña'
+    new_confirm = PasswordField(
+        'Confirmar contraseña nueva'
+    )
+
+    current_password = PasswordField(
+        'Contraseña actual',
+        [
+            validators.Required(message = 'La contraseña es requredida')
+        ]
     )
 
     submit = SubmitField(
-        'Registrarse'
+        'Actualizar datos'
     )
 
-  
+    

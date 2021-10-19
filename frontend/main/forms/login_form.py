@@ -6,20 +6,19 @@ from wtforms import validators
 
 class LoginForm(FlaskForm):
 
-    email = EmailField(
-        'Email',
-        [
-            validators.Required(message = 'El email es requerido')
-        ]
+    email = EmailField('E-mail',
+    [
+        validators.Required(message = "El correo es requerido"),
+        validators.Email( message ='Formato no válido'),
+    ],
+    render_kw={"placeholder": "Email"}
     )
 
-    password = PasswordField(
-        'Password',
-        [
-            validators.Required(message = 'La contraseña es requrida')
-        ]
+    #Definición de campo de contraseña
+    password = PasswordField('Contraseña', [
+        validators.Required(),
+    ],
+    render_kw={"placeholder": "Password"}
     )
-
-    submit = SubmitField(
-        'Iniciar sesion'
-    )
+    #Definición de campo submit
+    submit = SubmitField("Send")
