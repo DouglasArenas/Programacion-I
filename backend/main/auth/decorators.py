@@ -66,11 +66,12 @@ def admin_provider_required(fn):
 
 @jwt.user_identity_loader
 def user_identity_lookup(usuario):
+    print("identity")
     return usuario.id
-
 
 @jwt.additional_claims_loader
 def add_claims_to_access_token(usuario):
+    print("claims")
     claims = {
         'role': usuario.role,
         'id': usuario.id,
