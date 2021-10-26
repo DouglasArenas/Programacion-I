@@ -1,4 +1,5 @@
 from .. import login_manager
+<<<<<<< HEAD
 from flask import request, flash, redirect, url_for,current_app
 from flask_login import UserMixin, LoginManager, current_user
 import jwt
@@ -7,10 +8,20 @@ from functools import wraps
 #Clase que contendrá los datos del usuario logueado
 class User(UserMixin):
     def __init__(self ,id ,email ,role):
+=======
+from flask import request, flash, redirect, url_for
+from flask_login import UserMixin, LoginManager, current_user
+import jwt
+import requests
+
+class User(UserMixin):
+    def __init__(self, id, email, role):
+>>>>>>> eda5d572befd683eb2f143b17dee4b071842d2e7
         self.id = id
         self.email = email
         self.role = role
 
+<<<<<<< HEAD
 #Método que le indica a LoginManager como obtener los datos del usuario logueado
 #En nuestro caso al trabajar con JWT los datos se obtendran de los claims del Token
 #que ha sido guardado en una cookie en el browser
@@ -47,3 +58,44 @@ def admin_required(fn):
             return redirect(url_for('main.index'))
         return fn(*args, **kws)
     return wrapper
+=======
+@login_manager.request_loader
+def load_user(request):
+    if 'accsess_token' in request.cookies:
+        try:
+            jwt_options = {
+                'verify_signature': False,
+                'verify_exp': True,
+                'verify_nbf': False,
+                'verify_iat': True,
+                'verify_aud': False
+            }
+            token = request.cookies['access_token']
+            data = jwt.decode(token, options=jwt_options, algorithms=["HS256"])
+            user = User(data["id"], data["mail"], data["role"])
+            return user
+        except jwt.exceptions.InvalidTokenError:
+            print('Token invalido')
+        except jwt.exceptions.DecodeError:
+            print('Decode Error')
+    return None
+@login_manager.unauthorized_handler
+def unauthorized_callback():
+    flash('Inicie sesion para continuar', 'warning')
+    return redirect(url_for('main.login'))
+
+def admin_required(fn):
+    def wrapper(*args, **kwargs):
+        if not current_user.role == 'admin':
+            return redirect(url_for('bolsones.venta', page=1))
+        else:
+            return fn(*args, **kwargs)
+    return wrapper
+
+class BearerAuth(requests.auth.AuthBase):
+    def __init__(self, token):
+        self.token = token
+    def __call___(self, r):
+        r.headers["authorization"] = "Bearer" + self.token
+        return r
+>>>>>>> eda5d572befd683eb2f143b17dee4b071842d2e7
