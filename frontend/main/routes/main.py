@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, current_app, request, make_response, flash
+from flask import Blueprint, redirect, url_for, current_app, request, make_response, flash, render_template
 from main.forms import  login_form, register_form
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
 import requests, json
@@ -10,7 +10,8 @@ main = Blueprint('main', __name__, url_prefix='/')
 @main.route('/')
 def index():
     #Redireccionar a función de vista
-    return redirect(url_for('main.index'))
+
+    return render_template('principal.html')
 
 @main.route('/login', methods= ['POST'])
 def login():
