@@ -5,10 +5,10 @@ import jwt
 import requests
 
 class User(UserMixin):
-    def __init__(self, id, mail, rol):
+    def __init__(self, id, email, role):
         self.id = id
-        self.mail = mail
-        self.rol = rol
+        self.email = email
+        self.role = role
 
 @login_manager.request_loader
 def load_user(request):
@@ -23,7 +23,7 @@ def load_user(request):
             }
             token = request.cookies['access_token']
             data = jwt.decode(token, options=jwt_options, algorithms=["HS256"])
-            user = User(data["id"], data["mail"], data["rol"])
+            user = User(data["id"], data["email"], data["role"])
             return user
         except jwt.exceptions.InvalidTokenError:
             print('Invalid Token')
@@ -38,7 +38,7 @@ def unauthorized_callback():
 
 def admin_required(fn):
     def wrapper(*args, **kwargs):
-        if not current_user.rol == 'admin':
+        if not current_user.role == 'admin':
             return redirect(url_for('bolsones.venta', page=1))
         else:
             return fn(*args, **kwargs)

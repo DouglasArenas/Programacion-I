@@ -1,0 +1,129 @@
+{% macro ver_bolson(bolson, user) %}
+{#% from "macros/form_macros.html" import MostrarCampo, MostrarEnvio %#}
+<div class="col-md-5 col-sm-1 d-flex p-2 bd-highlight">
+  <div>
+    <ul class="list-unstyled">
+      <li class="p-2">
+        <img class="img-fluid" src="https://via.placeholder.com/100x100">
+      </li>
+      <li class="p-2">
+        <img class="img-fluid" src="https://via.placeholder.com/100x100">
+      </li>
+      <li class="p-2">
+        <img class="img-fluid" src="https://via.placeholder.com/100x100">
+      </li>
+    </ul>
+  </div>
+  <div class="p-2">
+    <img class="img-fluid" src="https://via.placeholder.com/100x100">
+  </div>
+</div>
+<div class="col-md-3 col-sm-1 d-flex p-2 bd-highlight">
+    <div>
+      <h3>{{bolson.nombre}}</h3>
+      <h1>{{bolson.precio}}</h1>
+      <h5>Productos que contiene:</h5>
+      {% if bolson.productos %}
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for producto in bolson.productos %}
+              <tr>
+                <th>{{producto.nombre}}</th>
+                <td>Cantidad: 1</td>
+                <td><a type="button" class="btn btn-primary" href="#">Ver</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+      <div>
+        <p>{{bolson.fecha}}</p> 
+      </div>
+      <div class="d-flex justify-content-center m-2">
+        {% if user.is_authenticated and user.role == 'admin' %}
+          {% if bolson.aprobado %}
+            <a type="button" class="btn btn-danger m-2" href="#">Desaprobar</a>
+          {% else %}
+            <a type="button" class="btn btn-success m-2" href="#">Aprobar</a>
+          {% endif %}
+        {% else %}
+          <a type="button" class="btn btn-primary m-2" href="#">Comprar</a>
+        {% endif %}
+        <button class="btn btn-primary m-2" type="button" onclick="history.back()">Volver</button>
+      </div>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro mostrar_card_bolson(bolson) %}
+{% if bolson.aprobado %}
+<div class="col-md-2 col-sm-6 pt-3">
+  <div class="card">
+    <img src="https://via.placeholder.com/100x100" class="card-img-top" alt="imagen bolson">
+    <div class="card-body">
+      <h5 class="card-title">{{bolson.nombre}}</h5>
+      <p class="card-text">{{bolson.precio}}</p>
+        <div class="d-grid gap-2">
+          <a href="#" class="btn btn-primary">Ver</a>
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro bolsones(bolson, user) %}
+<tr>
+  <!-- <th scope="row"><img src="https://via.placeholder.com/70x70"></th> -->
+  <th>{{bolson.nombre}}</th>
+  <td>{{bolson.fecha}}</td>
+  {% if bolson.aprobado %}
+  <td style="color:green">Si</td>
+  {% else %}
+  <td style="color:yellow">No</td> 
+  {% endif %}
+  <td>{{bolson.precio}}</td>
+  {% if user.is_authenticated and user.role == 'admin' %}
+  <td><a href="#" class="btn btn-primary">Ver</a></td>
+  {% else %}
+  <td><a href="#" class="btn btn-primary">Ver</a></td>
+  {% endif %}
+</tr>
+{% endmacro %}
+
+{% macro pendientes(bolson) %}
+<tr>
+  <th>{{bolson.nombre}}</th>
+  <td>{{bolson.fecha}}</td>
+  <td style="color:yellow">No</td>
+  <td>{{bolson.precio}}</td>
+  <td><a href="#" class="btn btn-primary">Ver</a></td>
+  <td>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Eliminar
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar bolsón</h5>
+          </div>
+          <div class="modal-body">
+            ¿Está seguro que quiere eliminar el bolsón?
+          </div>
+          <div class="modal-footer">
+            <a type="button" class="btn btn-danger" data-bs-dismiss="modal" href="#">Eliminar</a> 
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+  </td>
+</tr>
+{% endmacro %}
