@@ -13,36 +13,14 @@ def index():
 
     return render_template('principal.html')
 
+
+@main.route('/register', methods=['POST', 'GET'])
+def register():
+    return render_template('registro.html', title='Register')
+
 @main.route('/login', methods= ['POST'])
 def login():
-    loginForm = LoginForm()
-    if loginForm.validate_on_submit():
-        #Enviar requests
-        data = '{"email":"'+loginForm.email.data+'", "password":"'+loginForm.password.data+'"}'
-        r = requests.post(
-            current_app.config["API_URL"]+'/auth/login',
-            headers={"content-type":"application/json"},
-            data = data)
-        #Si la request se realiza con éxito
-        if r.status_code == 200:
-            #Cargar valores del usuario de la respuesta
-            user_data = json.loads(r.text)
-            user = User(id = user_data.get("id"), email = user_data.get("email"),  role = user_data.get("role") )
-            #Loguear objeto usuario
-            login_user(user)
-            # Crear una request de redirección
-            if current_user.role == 'admin':
-                req = make_response(redirect(url_for('admin.home')))
-                #Setear cookie con el valor del token
-            # elif current_user.role == 'proveedor':
-                # req = make_response(redirect(url_for('proveedor.home')))
-            req.set_cookie('access_token', user_data.get("access_token"), httponly = True)
-                #Realizar la request
-            return req
-        else:
-            #Mostrar error de autenticación
-            flash('Usuario o contraseña incorrecta','danger')
-    return redirect(url_for('main.index'))
+    return render_template('inicio_sesion.html', title='Iniciar sesion')
 
 @main.route('/logout')
 def logout():

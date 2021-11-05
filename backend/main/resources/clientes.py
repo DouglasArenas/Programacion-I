@@ -38,7 +38,7 @@ class Clientes(Resource):
         page = 1
         per_page = 10
         
-        clientes = db.session.query(UsuarioModel).filter(UsuarioModel.rol == "cliente")
+        clientes = db.session.query(UsuarioModel).filter(UsuarioModel.role == "cliente")
         if request.get_json():
             filters = request.get_json().items()
             for key, value in filters:
@@ -58,7 +58,7 @@ class Clientes(Resource):
     def post(self):
         cliente = UsuarioModel.from_json(request.get_json())
         print(cliente)
-        cliente.rol = 'cliente'
+        cliente.role = 'cliente'
         db.session.add(cliente)
         db.session.commit()
         return cliente.to_json(), 201

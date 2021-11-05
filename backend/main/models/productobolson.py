@@ -1,5 +1,5 @@
 from .. import db
-#from . import ProductoModel, BolsonModel
+from . import ProductoModel, BolsonModel
 
 class ProductoBolson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +15,6 @@ class ProductoBolson(db.Model):
         productobolson_json = {
             'id': self.id,
             'producto': self.producto.to_json(),
-            'bolson': self.bolson.to_json()
         }
         return productobolson_json
 
