@@ -2,8 +2,17 @@
     border-radius: 1em!important;
 }
 .color {
-    background-color: rgb(50, 150, 50);
+    background-color: green;
 }
 .colorbtn{
     background-color: rgb(150, 150, 150);
 }
+
+footer {
+    background-color: green;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    color: white;
+  }

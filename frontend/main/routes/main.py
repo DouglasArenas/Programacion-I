@@ -10,7 +10,6 @@ main = Blueprint('main', __name__, url_prefix='/')
 @main.route('/')
 def index():
     #Redireccionar a función de vista
-
     return render_template('principal.html')
 
 

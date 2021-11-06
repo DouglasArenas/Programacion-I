@@ -1,40 +1,35 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-
     <div class="container">
-
         <div class="row d-flex justify-content-center">
             <div class="col-md-4 color p-4 mt-5 rounded text-white">
                 <form class=""> 
                     <div class="mb-3">
-                      <label for="exampleInputFirstname1" class="form-label"> Nombre</label>
-                      <input type="" class="form-control" id="exampleInputFirstname1" placeholder="Ingrese Nombre">
+                      <label for="nombre" class="form-label"> Nombre</label>
+                      <input type="text" class="form-control" id="nombre" placeholder="Ingrese Nombre">
                     </div>
                     <div class="mb-3">
-                      <label for="exampleInputLastname1" class="form-label">Apellido</label>
-                      <input type="" class="form-control" id="exampleInputPassword1" placeholder="Ingrese Apellido">
+                      <label for="apellido" class="form-label">Apellido</label>
+                      <input type="text" class="form-control" id="apellido" placeholder="Ingrese Apellido">
                     </div>
                     <div class="mb-3">
-                        <label for="exampleInputTelephone1" class="form-label">Teléfono</label>
-                        <input type="tel" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese teléfono">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="telefono" placeholder="Ingrese teléfono">
                       </div>
                       <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Dirección de correo electrónico</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese correo electrónico">
+                        <label for="e-mail" class="form-label">Dirección de correo electrónico</label>
+                        <input type="email" class="form-control" id="e-mail" aria-describedby="emailHelp" placeholder="Ingrese correo electrónico">
                       </div>
                       <div class="mb-3">
-                        <label for="exampleInputPassword1 class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ingrese contraseña">
+                        <label for="contraseña" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="contraseña" placeholder="Ingrese contraseña">
                       </div>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
-                  </form> 
-            </div>
+                 </form> 
             </div>
         </div>
-        
-
-    {% endblock %}
+    </div>
+{% endblock %}
