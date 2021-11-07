@@ -1,7 +1,6 @@
-from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, SubmitField, StringField, IntegerField, SelectField, BooleanField
-from wtforms.fields.html5 import EmailField, DateField
+from wtforms import SubmitField, StringField, IntegerField, SelectField
+from wtforms.fields.html5 import DateField, DateTimeField
 from wtforms import validators
 
 class BolsonForm(FlaskForm):
@@ -12,13 +11,11 @@ class BolsonForm(FlaskForm):
             validators.Required(message = 'El nombre es requerido')
         ]
     )
-
-    descripcion = StringField(
-        'Descripcion',
+    fecha = DateField("Fecha",
         [
-            validators.Required(message = 'La descripcion es requrida')
-        ]
-    )
+            validators.Required()
+        ],  format='%Y-%m-%d'
+        )
 
     venta = IntegerField(
         'Listo para la venta',
@@ -27,7 +24,7 @@ class BolsonForm(FlaskForm):
         ]
     )
 
-    producto = SelectField(
+    productoId = SelectField(
         'Seleccionar producto',
         [
             validators.Required(message = 'Este campo es requiredo')
@@ -35,15 +32,10 @@ class BolsonForm(FlaskForm):
         choices = [('Seleccionar producto'), ('Naranja'), ('Mandarina')]
     )
 
-    imagen = StringField(
-        'Imagen del bolson',
-        [
-            validators.Required(message = 'Este campo es requerido')
-        ]
-    )
-
     submit = SubmitField(
         'Agregar bolson'
     )
-
-    
+class FormFilterBolsones(FlaskForm):
+    desde = DateTimeField('',[validators.optional()], format='%Y-%m-%d')
+    hasta = DateTimeField('',[validators.optional()], format='%Y-%m-%d')
+    envio = SubmitField('Filtrar')

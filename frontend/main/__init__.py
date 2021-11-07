@@ -14,6 +14,8 @@ def create_app():
     app.config['API_URL'] = os.getenv('API_URL')
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
+    print(f'La clave secreta es: {app.config["SECRET_KEY"]}')
+
     csrf.init_app(app)
     login_manager.init_app(app)
 
