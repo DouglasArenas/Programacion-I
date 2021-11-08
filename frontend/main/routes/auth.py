@@ -1,52 +1,77 @@
 from .. import login_manager
-from flask import request, flash, redirect, url_for
+from flask import request, flash, redirect, url_for,current_app
 from flask_login import UserMixin, LoginManager, current_user
 import jwt
-import requests
+from functools import wraps
 
 class User(UserMixin):
-    def __init__(self, id, email, role):
+    def __init__(self ,id ,email ,role):
         self.id = id
         self.email = email
         self.role = role
 
 @login_manager.request_loader
 def load_user(request):
+    #Verificar si la cookie ha sido cargada
     if 'access_token' in request.cookies:
         try:
-            jwt_options = {
-                'verify_signature': False,
-                'verify_exp': True,
-                'verify_nbf': False,
-                'verify_iat': True,
-                'verify_aud': False
-            }
-            token = request.cookies['access_token']
-            data = jwt.decode(token, options=jwt_options, algorithms=["HS256"])
-            user = User(data["id"], data["email"], data["role"])
+            decoded = jwt.decode(request.cookies['access_token'], current_app.config["SECRET_KEY"], algorithms=["HS256"], verify=False)
+            user = User(decoded["id"],decoded["email"],decoded["role"])
             return user
         except jwt.exceptions.InvalidTokenError:
-            print('Invalid Token')
+            print('Invalid Token.')
         except jwt.exceptions.DecodeError:
-            print('Decode Error')
+            print('DecodeError.')
     return None
 
+#Función que sobreescribe el método al intentar ingresar a una ruta no autorizada
 @login_manager.unauthorized_handler
 def unauthorized_callback():
-    flash('Debe iniciar sesion para continuar', 'warning')
-    return redirect(url_for('main.login'))
+    flash('Debe iniciar sesión para continuar.','warning')
+    return redirect(url_for('main.index'))
 
+#Define la función de verificación de admin para las rutas
 def admin_required(fn):
-    def wrapper(*args, **kwargs):
-        if not current_user.role == 'admin':
-            return redirect(url_for('bolsones.venta', page=1))
-        else:
-            return fn(*args, **kwargs)
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "admin":
+            flash('Acceso restringido a administradores.','warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
     return wrapper
 
-class BearerAuth(requests.auth.AuthBase):
-    def __init__(self, token):
-        self.token = token
-    def __call__(self, r):
-        r.headers["authorization"] = "Bearer " + self.token
-        return r 
+def proveerdor_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "proveedor":
+            flash('Acceso restringido a proveedor.','warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def cliente_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "cliente":
+            flash('Acceso restringido a cliente.','warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def admin_provider_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "admin" and not current_user.role == "proveedor":
+            flash('Acceso restringido a administradores y proveedores', 'warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper
+
+def admin_client_required(fn):
+    @wraps(fn)
+    def wrapper(*args, **kws):
+        if not current_user.role == "admin" and not current_user.role == "cliente":
+            flash('Acceso restringido a administradores y clientes', 'warning')
+            return redirect(url_for('main.index'))
+        return fn(*args, **kws)
+    return wrapper

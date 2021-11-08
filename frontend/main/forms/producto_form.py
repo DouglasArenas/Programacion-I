@@ -1,5 +1,6 @@
-from flask import FlaskForm
+from flask_wtf import FlaskForm
 from wtforms import SubmitField, StringField, SelectField
+from wtforms.validators import InputRequired
 from wtforms import validators
 
 class ProductoForm(FlaskForm):
@@ -14,14 +15,9 @@ class ProductoForm(FlaskForm):
         'Agregar producto'
     )
 
-class FilterProductoForm(FlaskForm):
-    proveedor = SelectField(
-        'Filtrar producto por proveedor',
-        [
-            validators.Required(message = 'Campo requerido')
-        ],
-        coerce = int
-    )
-    submit = SubmitField(
-        'Filtrar'
-    )
+class ProductoFilterForm(FlaskForm):
+    proveedorid = SelectField('', [validators.optional()], coerce = int,)
+    ordenamiento = SelectField('',
+            choices = [('producto',"Producto"),('proveedor',"Proveedor")],
+            validators=[InputRequired()], coerce=str, default='producto')
+    envio = SubmitField("Filtrar")

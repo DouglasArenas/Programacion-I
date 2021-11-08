@@ -18,7 +18,7 @@ def index():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        data = {
+        user = {
             "nombre": form.nombre.data,
             "apellido": form.apellido.data,
             "telefono": form.telefono.data,

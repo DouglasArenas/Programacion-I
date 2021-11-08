@@ -4,7 +4,6 @@ import requests, json
 from flask_login import current_user, login_required, LoginManager
 from .auth import admin_required
 from main.forms import PerfilForm, BolsonForm
-from main.routes.auth import BearerAuth
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
